@@ -153,3 +153,5 @@ Desktop.ini
 /pet-clinic-data/target/surefire-reports/guru.springframework.sfgpetclinic.services.springdatajpa.AbstractPersonSDJpaServiceTest.txt
 /pet-clinic-web/target/surefire-reports/TEST-guru.springframework.sfgpetclinic.controllers.OwnerControllerTest.xml
 /pet-clinic-web/target/surefire-reports/guru.springframework.sfgpetclinic.controllers.OwnerControllerTest.txt
+/pet-clinic-web/target/classes/static/resources/css
+/pet-clinic-web/target/surefire-reports
