@@ -3,6 +3,8 @@
  */
 package guru.springframework.sfgpetclinic.services.map_implementation;
 
+import java.util.List;
+
 import guru.springframework.sfgpetclinic.model.AbstractPerson;
 import guru.springframework.sfgpetclinic.services.interfaces.PersonService;
 
@@ -24,4 +26,9 @@ public abstract class AbstractPersonMapService<T extends AbstractPerson> extends
 				.orElse(null);
 	}
 
+	@Override
+	public List<T> findAllByLastNameLike(String lastName) {
+		// todo - impl
+		return null;
+	}
 }

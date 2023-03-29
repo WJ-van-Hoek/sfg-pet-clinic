@@ -3,6 +3,8 @@
  */
 package guru.springframework.sfgpetclinic.services.interfaces;
 
+import java.util.List;
+
 import guru.springframework.sfgpetclinic.model.AbstractPerson;
 
 /**
@@ -14,4 +16,6 @@ public interface PersonService<T extends AbstractPerson> extends BaseEntityServi
 	T findByFirstName(String firstName);
 	
 	T findByLastName(String lastName);
+	
+	List<T> findAllByLastNameLike(String lastName);
 }
