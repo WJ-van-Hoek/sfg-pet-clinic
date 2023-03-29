@@ -3,6 +3,8 @@
  */
 package guru.springframework.sfgpetclinic.services.springdatajpa;
 
+import java.util.List;
+
 import guru.springframework.sfgpetclinic.model.AbstractPerson;
 import guru.springframework.sfgpetclinic.repositories.PersonRepository;
 import guru.springframework.sfgpetclinic.services.interfaces.PersonService;
@@ -29,6 +31,11 @@ public abstract class AbstractPersonSDJpaService<T extends AbstractPerson, R ext
 	@Override
 	public T findByLastName(String lastName) {
 		return repository.findByLastName(lastName);
+	}
+	
+	@Override
+	public List<T> findAllByLastNameLike(String lastName) {
+		return repository.findAllByLastNameLike(lastName);
 	}
 
 }

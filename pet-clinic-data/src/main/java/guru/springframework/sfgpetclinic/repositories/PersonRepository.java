@@ -3,6 +3,8 @@
  */
 package guru.springframework.sfgpetclinic.repositories;
 
+import java.util.List;
+
 import guru.springframework.sfgpetclinic.model.AbstractPerson;
 
 /**
@@ -14,4 +16,6 @@ public interface PersonRepository<T extends AbstractPerson> extends BaseEntityRe
 	T findByFirstName(String firstName);
 
 	T findByLastName(String firstName);
+	
+	List<T> findAllByLastNameLike(String lastName);
 }
