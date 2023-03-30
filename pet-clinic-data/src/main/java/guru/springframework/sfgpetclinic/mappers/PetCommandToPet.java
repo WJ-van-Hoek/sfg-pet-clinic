@@ -4,6 +4,7 @@
 package guru.springframework.sfgpetclinic.mappers;
 
 import org.springframework.core.convert.converter.Converter;
+import org.springframework.stereotype.Component;
 
 import guru.springframework.sfgpetclinic.commands.PetCommand;
 import guru.springframework.sfgpetclinic.commands.VisitCommand;
@@ -13,6 +14,7 @@ import guru.springframework.sfgpetclinic.model.Pet;
  * @author Hoek0024 on 30 mrt. 2023
  *
  */
+@Component
 public class PetCommandToPet implements Converter<PetCommand, Pet> {
 
 	PetTypeCommandToPetType petTypeConverter;
