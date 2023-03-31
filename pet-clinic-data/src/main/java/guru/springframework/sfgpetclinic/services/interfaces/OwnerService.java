@@ -3,6 +3,7 @@
  */
 package guru.springframework.sfgpetclinic.services.interfaces;
 
+import guru.springframework.sfgpetclinic.commands.OwnerCommand;
 import guru.springframework.sfgpetclinic.model.Owner;
 
 /**
@@ -10,4 +11,5 @@ import guru.springframework.sfgpetclinic.model.Owner;
  *
  */
 public interface OwnerService extends PersonService<Owner>{
+	OwnerCommand findCommandById(Long id);
 }

@@ -29,6 +29,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import guru.springframework.sfgpetclinic.commands.OwnerCommand;
 import guru.springframework.sfgpetclinic.model.Owner;
 import guru.springframework.sfgpetclinic.services.interfaces.OwnerService;
 
@@ -94,5 +95,20 @@ class OwnerControllerTest {
 		mockMvc.perform(get("/owner/1/show")).andExpect(status().isOk()).andExpect(view().name("owner/ownerDetails"))
 				.andExpect(model().attribute("owner", hasProperty("id", is(1l))));
 	}
-
+	
+	@Test
+	void testNewOwner() throws Exception {
+		mockMvc.perform(get("/owner/1/new")).andExpect(status().isOk()).andExpect(view().name("owner/createOrUpdateOwnerForm"))
+				.andExpect(model().attributeExists("owner"));
+	}
+	
+	@Test
+	void testUpdateOwner() throws Exception {
+		OwnerCommand ownerCommand = new OwnerCommand();
+		ownerCommand.setId(1l);
+		
+		when(ownerService.findCommandById(anyLong())).thenReturn(ownerCommand);
+		mockMvc.perform(get("/owner/1/update")).andExpect(status().isOk()).andExpect(view().name("owner/createOrUpdateOwnerForm"))
+				.andExpect(model().attributeExists("owner")).andExpect(model().attribute("owner.id", 1));
+	}
 }
