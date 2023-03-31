@@ -3,6 +3,7 @@
  */
 package guru.springframework.sfgpetclinic.controllers;
 
+import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.Matchers.hasSize;
@@ -95,20 +96,21 @@ class OwnerControllerTest {
 		mockMvc.perform(get("/owner/1/show")).andExpect(status().isOk()).andExpect(view().name("owner/ownerDetails"))
 				.andExpect(model().attribute("owner", hasProperty("id", is(1l))));
 	}
-	
+
 	@Test
 	void testNewOwner() throws Exception {
-		mockMvc.perform(get("/owner/1/new")).andExpect(status().isOk()).andExpect(view().name("owner/createOrUpdateOwnerForm"))
-				.andExpect(model().attributeExists("owner"));
+		mockMvc.perform(get("/owner/new")).andExpect(status().isOk())
+				.andExpect(view().name("owner/createOrUpdateOwnerForm")).andExpect(model().attributeExists("owner"));
 	}
-	
+
 	@Test
 	void testUpdateOwner() throws Exception {
 		OwnerCommand ownerCommand = new OwnerCommand();
 		ownerCommand.setId(1l);
-		
+
 		when(ownerService.findCommandById(anyLong())).thenReturn(ownerCommand);
-		mockMvc.perform(get("/owner/1/update")).andExpect(status().isOk()).andExpect(view().name("owner/createOrUpdateOwnerForm"))
-				.andExpect(model().attributeExists("owner")).andExpect(model().attribute("owner.id", 1));
+		mockMvc.perform(get("/owner/1/update")).andExpect(status().isOk())
+				.andExpect(view().name("owner/createOrUpdateOwnerForm")).andExpect(model().attributeExists("owner"))
+				.andExpect(model().attribute("owner", equalTo(ownerCommand)));
 	}
 }

@@ -18,4 +18,8 @@ import lombok.Setter;
 @AllArgsConstructor
 public class AbstractBaseEntityCommand {
 	private Long id;
+	
+	public boolean isNew() {
+		return this.id == null;
+	}
 }

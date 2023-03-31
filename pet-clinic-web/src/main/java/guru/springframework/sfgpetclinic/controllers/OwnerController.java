@@ -100,10 +100,9 @@ public class OwnerController {
 	}
 	
 	@GetMapping(OWNER_UPDATE)
-	public ModelAndView updateOwner(@PathVariable("ownerId") Long ownerId) {
-		ModelAndView mav = new ModelAndView(OWNER_FORM);
-		mav.addObject(ownerService.findById(ownerId));
-		return mav;
+	public String updateOwner(@PathVariable("ownerId") Long ownerId, Model model) {
+		model.addAttribute("owner", ownerService.findCommandById(ownerId));
+		return OWNER_FORM;
 	}
 
 }
