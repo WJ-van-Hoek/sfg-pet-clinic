@@ -12,9 +12,12 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import guru.springframework.sfgpetclinic.commands.OwnerCommand;
 import guru.springframework.sfgpetclinic.model.Owner;
 import guru.springframework.sfgpetclinic.services.interfaces.OwnerService;
 
@@ -99,10 +102,23 @@ public class OwnerController {
 		return mav;
 	}
 	
+	@PostMapping(OWNER_NEW)
+	public String postNewOwner(@ModelAttribute OwnerCommand command) {
+    	OwnerCommand savedCommand = ownerService.saveOwnerCommandAsEntity(command);
+    	return "redirect:/owner/" + savedCommand.getId() + "/show";
+	}
+	
 	@GetMapping(OWNER_UPDATE)
-	public String updateOwner(@PathVariable("ownerId") Long ownerId, Model model) {
+	public String updateOwner(@PathVariable Long ownerId, Model model) {
 		model.addAttribute("owner", ownerService.findCommandById(ownerId));
 		return OWNER_FORM;
+	}
+	
+	@PostMapping(OWNER_UPDATE)
+	public String postUpdateOwner(@PathVariable Long ownerId, @ModelAttribute OwnerCommand command) {
+		command.setId(ownerId);
+    	OwnerCommand savedCommand = ownerService.saveOwnerCommandAsEntity(command);
+    	return "redirect:/owner/" + savedCommand.getId() + "/show";
 	}
 
 }

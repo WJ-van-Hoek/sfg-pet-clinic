@@ -47,6 +47,10 @@ public class OwnerMapService extends AbstractPersonMapService<Owner> implements 
 		return null;
 	}
 
-
+	@Override
+	public OwnerCommand saveOwnerCommandAsEntity(OwnerCommand ownerCommand) {
+		log.error("saveOwnerCommand is not implemented in OwnerMapService");
+		return null;
+	}
 
 }

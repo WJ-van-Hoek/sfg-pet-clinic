@@ -26,14 +26,7 @@ import lombok.experimental.SuperBuilder;
 @ExtendWith(MockitoExtension.class)
 class AbstractPersonSDJpaServiceTest {
 
-	/**
-	 * 
-	 */
 	private static final String LAST_NAME = "van Buuren";
-
-	/**
-	 * 
-	 */
 	private static final String FIRST_NAME = "Armin";
 
 	@Mock

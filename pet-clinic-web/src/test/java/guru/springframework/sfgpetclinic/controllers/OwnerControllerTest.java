@@ -7,11 +7,13 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.Matchers.hasProperty;
 import static org.hamcrest.Matchers.hasSize;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
@@ -33,7 +35,6 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import guru.springframework.sfgpetclinic.commands.OwnerCommand;
 import guru.springframework.sfgpetclinic.model.Owner;
 import guru.springframework.sfgpetclinic.services.interfaces.OwnerService;
-
 /**
  * @author Hoek0024 on 17 mrt. 2023
  *
@@ -112,5 +113,27 @@ class OwnerControllerTest {
 		mockMvc.perform(get("/owner/1/update")).andExpect(status().isOk())
 				.andExpect(view().name("owner/createOrUpdateOwnerForm")).andExpect(model().attributeExists("owner"))
 				.andExpect(model().attribute("owner", equalTo(ownerCommand)));
+	}
+	
+	@Test
+	void testPostNewOwner() throws Exception {
+		OwnerCommand ownerCommand = new OwnerCommand();
+		ownerCommand.setId(1l);		
+		
+		when(ownerService.saveOwnerCommandAsEntity(any(OwnerCommand.class))).thenReturn(ownerCommand);
+		
+		mockMvc.perform(post("/owner/new")).andExpect(status().is3xxRedirection())
+		.andExpect(view().name("redirect:/owner/1/show"));
+	}
+	
+	@Test
+	void testPostUpdateOwner() throws Exception {
+		OwnerCommand ownerCommand = new OwnerCommand();
+		ownerCommand.setId(1l);	
+		
+		when(ownerService.saveOwnerCommandAsEntity(any(OwnerCommand.class))).thenReturn(ownerCommand);
+		
+		mockMvc.perform(post("/owner/1/update")).andExpect(status().is3xxRedirection())
+		.andExpect(view().name("redirect:/owner/1/show"));
 	}
 }
