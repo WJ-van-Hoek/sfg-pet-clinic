@@ -5,6 +5,8 @@ package guru.springframework.sfgpetclinic.controllers;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,7 +14,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -103,9 +104,13 @@ public class OwnerController {
 	}
 	
 	@PostMapping(OWNER_NEW)
-	public String postNewOwner(@ModelAttribute OwnerCommand command) {
-    	OwnerCommand savedCommand = ownerService.saveOwnerCommandAsEntity(command);
-    	return "redirect:/owner/" + savedCommand.getId() + "/show";
+	public String postNewOwner(@Valid OwnerCommand ownerCommand, BindingResult result) {
+		if (result.hasErrors()) {
+			return OWNER_FORM;
+		} else {
+	    	OwnerCommand savedCommand = ownerService.saveOwnerCommandAsEntity(ownerCommand);
+	    	return "redirect:/owner/" + savedCommand.getId() + "/show";
+		}
 	}
 	
 	@GetMapping(OWNER_UPDATE)
@@ -115,10 +120,14 @@ public class OwnerController {
 	}
 	
 	@PostMapping(OWNER_UPDATE)
-	public String postUpdateOwner(@PathVariable Long ownerId, @ModelAttribute OwnerCommand command) {
-		command.setId(ownerId);
-    	OwnerCommand savedCommand = ownerService.saveOwnerCommandAsEntity(command);
-    	return "redirect:/owner/" + savedCommand.getId() + "/show";
+	public String postUpdateOwner(@Valid OwnerCommand ownerCommand, BindingResult result, @PathVariable Long ownerId) {
+		if (result.hasErrors()) {
+			return OWNER_FORM;
+		} else {
+			ownerCommand.setId(ownerId);
+			OwnerCommand savedCommand = ownerService.saveOwnerCommandAsEntity(ownerCommand);
+			return "redirect:/owner/" + savedCommand.getId() + "/show";
+		}
 	}
 
 }
