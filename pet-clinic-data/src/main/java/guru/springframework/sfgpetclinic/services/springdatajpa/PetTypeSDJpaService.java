@@ -40,13 +40,6 @@ public class PetTypeSDJpaService<T extends PetType, R extends PetTypeRepository<
 		this.petTypeToPetTypeCommand = petTypeToPetTypeCommand;
 	}
 
-	/**
-	 * @param repository
-	 */
-	public PetTypeSDJpaService(R repository) {
-		super(repository);
-	}
-
 	@Override
 	public PetTypeCommand findCommandById(Long id) {
 		return toCommand(findById(id));
