@@ -3,9 +3,15 @@
  */
 package guru.springframework.sfgpetclinic.services.springdatajpa;
 
+import java.util.Collection;
+import java.util.HashSet;
+
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
+import guru.springframework.sfgpetclinic.commands.PetTypeCommand;
+import guru.springframework.sfgpetclinic.mappers.PetTypeCommandToPetType;
+import guru.springframework.sfgpetclinic.mappers.PetTypeToPetTypeCommand;
 import guru.springframework.sfgpetclinic.model.PetType;
 import guru.springframework.sfgpetclinic.repositories.PetTypeRepository;
 import guru.springframework.sfgpetclinic.services.interfaces.PetTypeService;
@@ -19,6 +25,21 @@ import guru.springframework.sfgpetclinic.services.interfaces.PetTypeService;
 public class PetTypeSDJpaService<T extends PetType, R extends PetTypeRepository<PetType>>
 		extends AbstractBaseEntitySDJpaService<PetType, R> implements PetTypeService {
 
+	PetTypeCommandToPetType petTypeCommandToPetType;
+	PetTypeToPetTypeCommand petTypeToPetTypeCommand;
+
+	/**
+	 * @param repository
+	 * @param petTypeCommandToPetType
+	 * @param petTypeToPetTypeCommand
+	 */
+	public PetTypeSDJpaService(R repository, PetTypeCommandToPetType petTypeCommandToPetType,
+			PetTypeToPetTypeCommand petTypeToPetTypeCommand) {
+		super(repository);
+		this.petTypeCommandToPetType = petTypeCommandToPetType;
+		this.petTypeToPetTypeCommand = petTypeToPetTypeCommand;
+	}
+
 	/**
 	 * @param repository
 	 */
@@ -26,4 +47,23 @@ public class PetTypeSDJpaService<T extends PetType, R extends PetTypeRepository<
 		super(repository);
 	}
 
+	@Override
+	public PetTypeCommand findCommandById(Long id) {
+		return toCommand(findById(id));
+	}
+	
+	@Override
+	public Collection<PetTypeCommand> findAllPetTypeCommands() {
+		Collection<PetTypeCommand> petTypeCommands = new HashSet<>();
+		repository.findAll().forEach(petType -> petTypeCommands.add(toCommand(petType)));
+		return petTypeCommands;
+	}
+
+	private PetTypeCommand toCommand(PetType petType) {
+		return petTypeToPetTypeCommand.convert(petType);
+	}
+
+	private PetType toEntity(PetTypeCommand petTypeCommand) {
+		return petTypeCommandToPetType.convert(petTypeCommand);
+	}
 }

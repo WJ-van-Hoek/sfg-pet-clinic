@@ -3,6 +3,9 @@
  */
 package guru.springframework.sfgpetclinic.services.interfaces;
 
+import java.util.Collection;
+
+import guru.springframework.sfgpetclinic.commands.PetTypeCommand;
 import guru.springframework.sfgpetclinic.model.PetType;
 
 /**
@@ -10,5 +13,6 @@ import guru.springframework.sfgpetclinic.model.PetType;
  *
  */
 public interface PetTypeService extends BaseEntityService<PetType>{
-
+	PetTypeCommand findCommandById(Long id);
+	Collection<PetTypeCommand> findAllPetTypeCommands();
 }
