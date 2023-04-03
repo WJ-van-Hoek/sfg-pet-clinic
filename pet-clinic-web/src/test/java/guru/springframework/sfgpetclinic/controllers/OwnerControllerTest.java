@@ -35,6 +35,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import guru.springframework.sfgpetclinic.commands.OwnerCommand;
 import guru.springframework.sfgpetclinic.model.Owner;
 import guru.springframework.sfgpetclinic.services.interfaces.OwnerService;
+
 /**
  * @author Hoek0024 on 17 mrt. 2023
  *
@@ -114,26 +115,26 @@ class OwnerControllerTest {
 				.andExpect(view().name("owner/createOrUpdateOwnerForm")).andExpect(model().attributeExists("owner"))
 				.andExpect(model().attribute("owner", equalTo(ownerCommand)));
 	}
-	
+
 	@Test
 	void testPostNewOwner() throws Exception {
 		OwnerCommand ownerCommand = new OwnerCommand();
-		ownerCommand.setId(1l);		
-		
+		ownerCommand.setId(1l);
+
 		when(ownerService.saveOwnerCommandAsEntity(any(OwnerCommand.class))).thenReturn(ownerCommand);
-		
+
 		mockMvc.perform(post("/owner/new")).andExpect(status().is3xxRedirection())
-		.andExpect(view().name("redirect:/owner/1/show"));
+				.andExpect(view().name("redirect:/owner/1/show")).andExpect(model().attributeExists("ownerCommand"));
 	}
-	
+
 	@Test
 	void testPostUpdateOwner() throws Exception {
 		OwnerCommand ownerCommand = new OwnerCommand();
-		ownerCommand.setId(1l);	
-		
+		ownerCommand.setId(1l);
+
 		when(ownerService.saveOwnerCommandAsEntity(any(OwnerCommand.class))).thenReturn(ownerCommand);
-		
+
 		mockMvc.perform(post("/owner/1/update")).andExpect(status().is3xxRedirection())
-		.andExpect(view().name("redirect:/owner/1/show"));
+				.andExpect(view().name("redirect:/owner/1/show"));
 	}
 }
