@@ -3,9 +3,12 @@
  */
 package guru.springframework.sfgpetclinic.services.map_implementation;
 
+import java.util.Collection;
+
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
+import guru.springframework.sfgpetclinic.commands.PetCommand;
 import guru.springframework.sfgpetclinic.model.Pet;
 import guru.springframework.sfgpetclinic.model.PetType;
 import guru.springframework.sfgpetclinic.services.interfaces.PetService;
@@ -40,6 +43,41 @@ public class PetMapService extends AbstractBaseEntityMapService<Pet> implements 
 		}
 
 		return super.save(pet);
+	}
+
+	@Override
+	public PetCommand findCommandById(Long id) {
+		
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Collection<PetCommand> findAllPetCommandsOfOwner(Long ownerId) {
+		
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	@Override
+	public PetType findPetType(Long petId) {
+		
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public PetCommand savePetCommandAsEntity(PetCommand petCommand) {
+		
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Collection<Pet> findAllPetsOfOwner(Long ownerId) {
+		
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

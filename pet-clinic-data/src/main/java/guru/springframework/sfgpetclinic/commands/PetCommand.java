@@ -7,7 +7,11 @@ import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import guru.springframework.sfgpetclinic.model.PetType;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -20,9 +24,12 @@ import lombok.Setter;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class PetCommand extends AbstractBaseEntityCommand {
 	private String name;
-    private PetTypeCommand petTypeCommand;
+	private PetType petType;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate birthDate;
+    private OwnerCommand ownerCommand;
     private Set<VisitCommand> visitCommands = new HashSet<>();
 }

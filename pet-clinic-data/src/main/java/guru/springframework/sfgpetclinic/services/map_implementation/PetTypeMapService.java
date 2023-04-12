@@ -17,21 +17,20 @@ import guru.springframework.sfgpetclinic.services.interfaces.PetTypeService;
  *
  */
 @Service
-@Profile({"default", "map"})
+@Profile({ "default", "map" })
 public class PetTypeMapService extends AbstractBaseEntityMapService<PetType> implements PetTypeService {
 
 	@Override
 	public PetTypeCommand findCommandById(Long id) {
-		
+
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Collection<PetTypeCommand> findAllPetTypeCommands() {
-		
+	public Collection<PetType> findAllPetTypes() {
+
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 }

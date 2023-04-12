@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import guru.springframework.sfgpetclinic.commands.OwnerCommand;
 import guru.springframework.sfgpetclinic.commands.PetCommand;
 import guru.springframework.sfgpetclinic.model.Owner;
+import guru.springframework.sfgpetclinic.model.Pet;
 
 /**
  * @author Hoek0024 on 30 mrt. 2023
@@ -41,6 +42,7 @@ public class OwnerCommandToOwner implements Converter<OwnerCommand, Owner> {
 		if (source.getPetCommands() != null && !source.getPetCommands().isEmpty()) {
 			source.getPetCommands()
 					.forEach((PetCommand petCommand) -> result.getPets().add(petConverter.convert(petCommand)));
+			result.getPets().forEach((Pet pet) -> pet.setOwner(result));
 		}
 		return result;
 	}

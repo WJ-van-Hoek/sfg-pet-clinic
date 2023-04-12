@@ -21,6 +21,12 @@ import lombok.Setter;
 @Entity
 @Table(name = "type")
 public class PetType extends AbstractBaseEntity {
+	
+    @Builder
+    public PetType(Long id, String name) {
+        super(id);
+        this.name = name;
+    }
 
 	@Column(name = "name")
     private String name;

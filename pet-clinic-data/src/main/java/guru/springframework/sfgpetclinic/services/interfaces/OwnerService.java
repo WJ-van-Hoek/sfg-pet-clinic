@@ -4,6 +4,7 @@
 package guru.springframework.sfgpetclinic.services.interfaces;
 
 import guru.springframework.sfgpetclinic.commands.OwnerCommand;
+import guru.springframework.sfgpetclinic.commands.PetCommand;
 import guru.springframework.sfgpetclinic.model.Owner;
 
 /**
@@ -14,5 +15,8 @@ public interface OwnerService extends PersonService<Owner> {
 
 	OwnerCommand findCommandById(Long id);
 	OwnerCommand saveOwnerCommandAsEntity(OwnerCommand ownerCommand);
+	OwnerCommand addNewPetCommandToOwnerCommand(OwnerCommand ownerCommand);
+	PetCommand findPetCommandByName(OwnerCommand ownerCommand, String name);
+	PetCommand findPetCommandByName(OwnerCommand ownerCommand, String name, boolean ignoreNew);
 
 }

@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import guru.springframework.sfgpetclinic.commands.OwnerCommand;
+import guru.springframework.sfgpetclinic.commands.PetCommand;
 import guru.springframework.sfgpetclinic.mappers.OwnerCommandToOwner;
 import guru.springframework.sfgpetclinic.mappers.OwnerToOwnerCommand;
 import guru.springframework.sfgpetclinic.model.Owner;
@@ -45,6 +46,33 @@ public class OwnerSDJpaService<T extends Owner, R extends OwnerRepository<Owner>
 		return toCommand(repository.save(toEntity(ownerCommand)));
 	}
 
+	@Override
+	public OwnerCommand addNewPetCommandToOwnerCommand(OwnerCommand ownerCommand) {
+		PetCommand petCommand = new PetCommand();
+		ownerCommand.addPetCommand(petCommand);
+		return ownerCommand;
+	}
+
+	@Override
+	public PetCommand findPetCommandByName(OwnerCommand ownerCommand, String name) {
+		return findPetCommandByName(ownerCommand, name, false);
+	}
+
+	@Override
+	public PetCommand findPetCommandByName(OwnerCommand ownerCommand, String name, boolean ignoreNew) {
+		name = name.toLowerCase();
+		for (PetCommand petCommand : ownerCommand.getPetCommands()) {
+			
+				String compName = petCommand.getName();
+				compName = compName.toLowerCase();
+				if (compName.equals(name)) {
+					return petCommand;
+				}
+
+		}
+		return null;
+	}
+
 	private OwnerCommand toCommand(Owner owner) {
 		return ownerToOwnerCommand.convert(owner);
 	}
@@ -52,4 +80,5 @@ public class OwnerSDJpaService<T extends Owner, R extends OwnerRepository<Owner>
 	private Owner toEntity(OwnerCommand ownerCommand) {
 		return ownerCommandToOwner.convert(ownerCommand);
 	}
+
 }

@@ -19,7 +19,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import guru.springframework.sfgpetclinic.commands.PetCommand;
-import guru.springframework.sfgpetclinic.commands.PetTypeCommand;
 import guru.springframework.sfgpetclinic.commands.VisitCommand;
 import guru.springframework.sfgpetclinic.model.Pet;
 import guru.springframework.sfgpetclinic.model.PetType;
@@ -42,7 +41,7 @@ public class PetToPetCommandTest {
 
     private static final Long ID_VALUE = Long.valueOf(1l);
     private static final String NAME = "name";
-    private static final PetTypeCommand PET_TYPE_COMMAND = new PetTypeCommand();
+    
     private Set<Visit> VISITS = new HashSet<>();
 
 	/**
@@ -66,15 +65,17 @@ public class PetToPetCommandTest {
 	@Test
 	void testConvert() {
 		//given
+		PetType petType = new PetType();
+		petType.setId(3l);
+		
 		Pet pet = new Pet();
 		pet.setId(ID_VALUE);
 		pet.setName(NAME);
-		pet.setPetType(new PetType());
+		pet.setPetType(petType);
 		pet.setVisits(VISITS);
 		pet.getVisits().add(new Visit());
 
 		//when
-        when(petTypeConverter.convert(any(PetType.class))).thenReturn(PET_TYPE_COMMAND);
         when(visitConverter.convert(any(Visit.class))).thenReturn(new VisitCommand());
         
 		PetCommand petCommand = converter.convert(pet);
@@ -82,7 +83,7 @@ public class PetToPetCommandTest {
 		//then
 		Assertions.assertEquals(ID_VALUE, petCommand.getId());
 		Assertions.assertEquals(NAME, petCommand.getName());
-		Assertions.assertEquals(PET_TYPE_COMMAND, petCommand.getPetTypeCommand());
+		Assertions.assertEquals(petType, petCommand.getPetType());
 
 		verify(visitConverter, times(1)).convert(any(Visit.class));
 	}

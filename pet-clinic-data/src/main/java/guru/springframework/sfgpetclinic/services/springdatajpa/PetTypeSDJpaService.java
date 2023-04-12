@@ -44,19 +44,16 @@ public class PetTypeSDJpaService<T extends PetType, R extends PetTypeRepository<
 	public PetTypeCommand findCommandById(Long id) {
 		return toCommand(findById(id));
 	}
-	
-	@Override
-	public Collection<PetTypeCommand> findAllPetTypeCommands() {
-		Collection<PetTypeCommand> petTypeCommands = new HashSet<>();
-		repository.findAll().forEach(petType -> petTypeCommands.add(toCommand(petType)));
-		return petTypeCommands;
-	}
 
+	@Override
+	public Collection<PetType> findAllPetTypes() {
+		Collection<PetType> petTypes = new HashSet<>();
+		repository.findAll().forEach(petType -> petTypes.add(petType));
+		return petTypes;
+	}
+	
 	private PetTypeCommand toCommand(PetType petType) {
 		return petTypeToPetTypeCommand.convert(petType);
 	}
 
-	private PetType toEntity(PetTypeCommand petTypeCommand) {
-		return petTypeCommandToPetType.convert(petTypeCommand);
-	}
 }

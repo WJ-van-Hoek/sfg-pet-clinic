@@ -99,7 +99,7 @@ public class OwnerController {
 	@GetMapping(OWNER_NEW)
 	public ModelAndView newOwner() {
 		ModelAndView mav = new ModelAndView(OWNER_FORM);
-		mav.addObject(Owner.builder().build());
+		mav.addObject(new OwnerCommand());
 		return mav;
 	}
 	
@@ -115,7 +115,7 @@ public class OwnerController {
 	
 	@GetMapping(OWNER_UPDATE)
 	public String updateOwner(@PathVariable Long ownerId, Model model) {
-		model.addAttribute("owner", ownerService.findCommandById(ownerId));
+		model.addAttribute("ownerCommand", ownerService.findCommandById(ownerId));
 		return OWNER_FORM;
 	}
 	

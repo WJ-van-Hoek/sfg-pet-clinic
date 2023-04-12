@@ -14,5 +14,5 @@ import guru.springframework.sfgpetclinic.model.PetType;
  */
 public interface PetTypeService extends BaseEntityService<PetType>{
 	PetTypeCommand findCommandById(Long id);
-	Collection<PetTypeCommand> findAllPetTypeCommands();
+	Collection<PetType> findAllPetTypes();
 }
