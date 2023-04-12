@@ -3,6 +3,8 @@
  */
 package guru.springframework.sfgpetclinic.services.map_implementation;
 
+import java.util.Set;
+
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
@@ -73,6 +75,27 @@ public class OwnerMapService extends AbstractPersonMapService<Owner> implements 
 		
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public Set<PetCommand> findAllPetCommandsOfOwnerId(Long ownerId) {
+		
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void updatePetCommand(PetCommand petCommand) {
+		
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void addPetCommand(OwnerCommand ownerCommand, PetCommand petCommand) {
+		
+		// TODO Auto-generated method stub
+		
 	}
 
 }

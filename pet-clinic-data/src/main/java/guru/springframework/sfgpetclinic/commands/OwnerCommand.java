@@ -24,9 +24,13 @@ public class OwnerCommand extends AbstractPersonCommand {
 	private String city;
 	private String telephone;
 	private Set<PetCommand> petCommands = new HashSet<>();
-	
+
 	public void addPetCommand(PetCommand petCommand) {
 		petCommand.setOwnerCommand(this);
 		this.getPetCommands().add(petCommand);
-	}	
+	}
+
+	public void removePetCommandById(Long id) {
+		this.getPetCommands().removeIf(petCommand -> petCommand.getId() == id);
+	}
 }

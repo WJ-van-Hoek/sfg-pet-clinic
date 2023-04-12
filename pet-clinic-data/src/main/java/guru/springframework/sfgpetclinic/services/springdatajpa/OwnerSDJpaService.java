@@ -3,6 +3,8 @@
  */
 package guru.springframework.sfgpetclinic.services.springdatajpa;
 
+import java.util.Set;
+
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
@@ -42,6 +44,12 @@ public class OwnerSDJpaService<T extends Owner, R extends OwnerRepository<Owner>
 	}
 
 	@Override
+	public Set<PetCommand> findAllPetCommandsOfOwnerId(Long ownerId) {
+		OwnerCommand ownerCommand = findCommandById(ownerId);
+		return ownerCommand.getPetCommands();
+	}
+
+	@Override
 	public OwnerCommand saveOwnerCommandAsEntity(OwnerCommand ownerCommand) {
 		return toCommand(repository.save(toEntity(ownerCommand)));
 	}
@@ -62,15 +70,31 @@ public class OwnerSDJpaService<T extends Owner, R extends OwnerRepository<Owner>
 	public PetCommand findPetCommandByName(OwnerCommand ownerCommand, String name, boolean ignoreNew) {
 		name = name.toLowerCase();
 		for (PetCommand petCommand : ownerCommand.getPetCommands()) {
-			
-				String compName = petCommand.getName();
-				compName = compName.toLowerCase();
-				if (compName.equals(name)) {
-					return petCommand;
-				}
+
+			String compName = petCommand.getName();
+			compName = compName.toLowerCase();
+			if (compName.equals(name)) {
+				return petCommand;
+			}
 
 		}
 		return null;
+	}
+
+	@Override
+	public void addPetCommand(OwnerCommand ownerCommand, PetCommand petCommand) {
+		ownerCommand.addPetCommand(petCommand);
+	}
+
+	@Override
+	public void updatePetCommand(PetCommand petCommand) {
+		OwnerCommand ownerCommand = petCommand.getOwnerCommand();
+		if (ownerCommand.getPetCommands().removeIf(p -> p.getId() == petCommand.getId())) {
+			addPetCommand(ownerCommand, petCommand);
+		} else {
+			throw new RuntimeException(
+					"PetCommand " + petCommand.toString() + " can't be updated because it does not exist");
+		}
 	}
 
 	private OwnerCommand toCommand(Owner owner) {

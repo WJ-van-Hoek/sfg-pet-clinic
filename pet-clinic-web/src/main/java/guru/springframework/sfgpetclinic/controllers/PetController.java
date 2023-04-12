@@ -35,6 +35,7 @@ public class PetController {
 
 	// mappings
 	private static final String PET_NEW = "/owner/{ownerId}/pet/new";
+	private static final String PET_UPDATE = "/owner/{ownerId}/pet/{petId}/update";
 
 	private static final String PET_FORM = "pet/createOrUpdatePetForm";
 
@@ -71,29 +72,50 @@ public class PetController {
 	public void initOwnerCommandBinder(WebDataBinder webDataBinder) {
 		webDataBinder.setDisallowedFields("id");
 	}
-		
+
 	@GetMapping(PET_NEW)
 	public String newPet(OwnerCommand ownerCommand, Model model) {
 		return newModelWithNewPetCommand(ownerCommand, model);
 	}
 
+	@GetMapping(PET_UPDATE)
+	public String updatePet(OwnerCommand ownerCommand, @PathVariable Long petId, Model model) {
+		model.addAttribute("petCommand", petService.findCommandById(petId));
+		return PET_FORM;
+	}
+
 	@PostMapping(PET_NEW)
-	public String processNewPet(OwnerCommand ownerCommand, @Valid PetCommand petCommand, BindingResult result, ModelMap model) {
+	public String processNewPet(OwnerCommand ownerCommand, @Valid PetCommand petCommand, BindingResult result,
+			ModelMap model) {
 		if (StringUtils.hasLength(petCommand.getName()) && petCommand.isNew()
 				&& ownerService.findPetCommandByName(ownerCommand, petCommand.getName(), true) != null) {
 			result.rejectValue("name", "duplicate", "already exists");
 		}
-			
-		ownerCommand.addPetCommand(petCommand);
 		if (result.hasErrors()) {
 			model.put("petCommand", petCommand);
-			return PET_FORM;	
+			return PET_FORM;
 		} else {
+			ownerCommand.addPetCommand(petCommand);
 			ownerService.saveOwnerCommandAsEntity(ownerCommand);
-			return "redirect:/owner/"+ownerCommand.getId()+"/show";
+			return "redirect:/owner/" + ownerCommand.getId() + "/show";
 		}
 	}
-	
+
+	@PostMapping(PET_UPDATE)
+	public String processUpdatePet(OwnerCommand ownerCommand, @Valid PetCommand petCommand, BindingResult result,
+			ModelMap model) throws Exception {
+
+		petCommand.setOwnerCommand(ownerCommand);
+		if (result.hasErrors()) {
+			model.put("petCommand", petCommand);
+			return PET_FORM;
+		} else {
+			ownerService.updatePetCommand(petCommand);
+			ownerService.saveOwnerCommandAsEntity(ownerCommand);
+			return "redirect:/owner/" + ownerCommand.getId() + "/show";
+		}
+	}
+
 	private String newModelWithNewPetCommand(OwnerCommand ownerCommand, Model model) {
 		PetCommand petCommand = new PetCommand();
 		petCommand.setOwnerCommand(ownerCommand);
@@ -101,4 +123,5 @@ public class PetController {
 		model.addAttribute("petCommand", petCommand);
 		return PET_FORM;
 	}
+
 }

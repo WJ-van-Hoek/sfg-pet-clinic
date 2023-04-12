@@ -21,6 +21,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
@@ -40,10 +41,10 @@ class PetControllerTest {
 
 	@Mock
 	PetService petService;
-	
+
 	@Mock
 	OwnerService ownerService;
-	
+
 	@Mock
 	PetTypeService petTypeService;
 
@@ -51,7 +52,7 @@ class PetControllerTest {
 	PetController petController;
 
 	MockMvc mockMvc;
-	
+
 	OwnerCommand ownerCommand;
 	PetCommand petCommand;
 	Set<PetType> petTypes;
@@ -70,15 +71,15 @@ class PetControllerTest {
 		petType2.setName("Cat");
 		petTypes.add(petType1);
 		petTypes.add(petType2);
-		
+
 		petCommand = new PetCommand();
 		petCommand.setId(2l);
 		petCommand.setPetType(petType1);
-		
+
 		ownerCommand = new OwnerCommand();
 		ownerCommand.setId(1l);
 		ownerCommand.addPetCommand(petCommand);
-		
+
 		mockMvc = MockMvcBuilders.standaloneSetup(petController).build();
 	}
 
@@ -86,43 +87,42 @@ class PetControllerTest {
 	void testNewPet() throws Exception {
 		when(ownerService.findCommandById(anyLong())).thenReturn(ownerCommand);
 		when(petTypeService.findAllPetTypes()).thenReturn(petTypes);
-		
+
 		mockMvc.perform(get("/owner/1/pet/new")).andExpect(status().isOk())
-				.andExpect(view().name("pet/createOrUpdatePetForm"))
-				.andExpect(model().attributeExists("petCommand"))
+				.andExpect(view().name("pet/createOrUpdatePetForm")).andExpect(model().attributeExists("petCommand"))
 				.andExpect(model().attributeExists("ownerCommand"))
 				.andExpect(model().attribute("ownerCommand", equalTo(ownerCommand)));
 	}
-	
+
 	@Test
 	void testPostNewPet() throws Exception {
 		when(ownerService.findCommandById(anyLong())).thenReturn(ownerCommand);
-		
+
 		mockMvc.perform(post("/owner/1/pet/new")).andExpect(status().is3xxRedirection())
-				.andExpect(view().name("redirect:/owner/"+ownerCommand.getId()+"/show"))
-				.andExpect(model().attributeExists("petCommand"))
-				.andExpect(model().attributeExists("ownerCommand"));
+				.andExpect(view().name("redirect:/owner/" + ownerCommand.getId() + "/show"))
+				.andExpect(model().attributeExists("petCommand")).andExpect(model().attributeExists("ownerCommand"));
 	}
 
-//	@Test
-//	void testUpdateOwner() throws Exception {
-//		when(ownerService.findCommandById(anyLong())).thenReturn(ownerCommand);
-//		when(petTypeService.findAllPetTypeCommands()).thenReturn(petTypeCommands);
-//
-//		when(petService.findCommandById(anyLong())).thenReturn(petCommand);
-//		mockMvc.perform(get("owner/1/pet/1/update")).andExpect(status().isOk())
-//				.andExpect(view().name("pet/createOrUpdatePetForm")).andExpect(model().attributeExists("petCommand"))
-//				.andExpect(model().attribute("petCommand", equalTo(petCommand)));
-//	}
-//	
-//	@Test
-//	void testPostUpdateOwner() throws Exception {
-//		when(ownerService.findCommandById(anyLong())).thenReturn(ownerCommand);
-//		when(petTypeService.findAllPetTypeCommands()).thenReturn(petTypeCommands);
-//
-//		when(petService.findCommandById(anyLong())).thenReturn(petCommand);
-//		mockMvc.perform(get("owner/1/pet/1/update")).andExpect(status().isOk())
-//				.andExpect(view().name("pet/createOrUpdatePetForm")).andExpect(model().attributeExists("petCommand"))
-//				.andExpect(model().attribute("petCommand", equalTo(petCommand)));
-//	}
+	@Test
+	void testUpdateOwner() throws Exception {
+		when(ownerService.findCommandById(anyLong())).thenReturn(ownerCommand);
+		when(petService.findCommandById(anyLong())).thenReturn(petCommand);
+
+		mockMvc.perform(get("/owner/1/pet/2/update")).andExpect(status().isOk())
+				.andExpect(view().name("pet/createOrUpdatePetForm")).andExpect(model().attributeExists("petCommand"))
+				.andExpect(model().attributeExists("ownerCommand"))
+				.andExpect(model().attribute("ownerCommand", equalTo(ownerCommand)))
+				.andExpect(model().attribute("petCommand", equalTo(petCommand)));
+	}
+
+	@Test
+	void testPostUpdateOwner() throws Exception {
+		when(ownerService.findCommandById(anyLong())).thenReturn(ownerCommand);
+
+		mockMvc.perform(post("/owner/1/pet/2/update").contentType(MediaType.APPLICATION_FORM_URLENCODED)
+				.sessionAttr("ownerCommand", ownerCommand).sessionAttr("petCommand", petCommand))
+				.andExpect(status().is3xxRedirection())
+				.andExpect(view().name("redirect:/owner/" + ownerCommand.getId() + "/show"))
+				.andExpect(model().attributeExists("petCommand")).andExpect(model().attributeExists("ownerCommand"));
+	}
 }

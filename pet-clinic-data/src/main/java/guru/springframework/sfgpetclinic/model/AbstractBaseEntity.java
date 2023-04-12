@@ -38,4 +38,5 @@ public abstract class AbstractBaseEntity implements Serializable {
 	public boolean isNew() {
 		return this.id == null;
 	}
+	
 }
