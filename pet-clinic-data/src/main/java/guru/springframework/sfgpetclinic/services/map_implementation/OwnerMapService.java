@@ -3,10 +3,13 @@
  */
 package guru.springframework.sfgpetclinic.services.map_implementation;
 
+import java.util.Set;
+
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import guru.springframework.sfgpetclinic.commands.OwnerCommand;
+import guru.springframework.sfgpetclinic.commands.PetCommand;
 import guru.springframework.sfgpetclinic.model.Owner;
 import guru.springframework.sfgpetclinic.services.interfaces.OwnerService;
 import guru.springframework.sfgpetclinic.services.interfaces.PetService;
@@ -51,6 +54,48 @@ public class OwnerMapService extends AbstractPersonMapService<Owner> implements 
 	public OwnerCommand saveOwnerCommandAsEntity(OwnerCommand ownerCommand) {
 		log.error("saveOwnerCommand is not implemented in OwnerMapService");
 		return null;
+	}
+
+	@Override
+	public OwnerCommand addNewPetCommandToOwnerCommand(OwnerCommand ownerCommand) {
+		
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public PetCommand findPetCommandByName(OwnerCommand ownerCommand, String name) {
+		
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public PetCommand findPetCommandByName(OwnerCommand ownerCommand, String name, boolean ignoreNew) {
+		
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Set<PetCommand> findAllPetCommandsOfOwnerId(Long ownerId) {
+		
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void updatePetCommand(PetCommand petCommand) {
+		
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void addPetCommand(OwnerCommand ownerCommand, PetCommand petCommand) {
+		
+		// TODO Auto-generated method stub
+		
 	}
 
 }

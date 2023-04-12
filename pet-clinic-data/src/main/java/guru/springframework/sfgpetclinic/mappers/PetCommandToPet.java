@@ -17,14 +17,12 @@ import guru.springframework.sfgpetclinic.model.Pet;
 @Component
 public class PetCommandToPet implements Converter<PetCommand, Pet> {
 
-	PetTypeCommandToPetType petTypeConverter;
 	VisitCommandToVisit visitConverter;
 
 	/**
 	 * @param petTypeConverter
 	 */
-	public PetCommandToPet(PetTypeCommandToPetType petTypeConverter, VisitCommandToVisit visitConverter) {
-		this.petTypeConverter = petTypeConverter;
+	public PetCommandToPet(VisitCommandToVisit visitConverter) {
 		this.visitConverter = visitConverter;
 	}
 
@@ -38,7 +36,7 @@ public class PetCommandToPet implements Converter<PetCommand, Pet> {
 		result.setId(source.getId());
 		result.setName(source.getName());
 		result.setBirthDate(source.getBirthDate());
-		result.setPetType(petTypeConverter.convert(source.getPetTypeCommand()));
+		result.setPetType(source.getPetType());
 		if (source.getVisitCommands() != null && !source.getVisitCommands().isEmpty()) {
 			source.getVisitCommands().forEach(
 					(VisitCommand visitCommand) -> result.getVisits().add(visitConverter.convert(visitCommand)));

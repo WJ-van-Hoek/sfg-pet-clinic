@@ -10,5 +10,5 @@ import guru.springframework.sfgpetclinic.model.PetType;
  *
  */
 public interface PetTypeRepository<T extends PetType> extends BaseEntityRepository<PetType> {
-
+	T findByName(String name);
 }
