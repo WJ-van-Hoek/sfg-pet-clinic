@@ -6,6 +6,7 @@ package guru.springframework.sfgpetclinic.services.map_implementation;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
+import guru.springframework.sfgpetclinic.commands.VisitCommand;
 import guru.springframework.sfgpetclinic.model.Visit;
 import guru.springframework.sfgpetclinic.services.interfaces.VisitService;
 
@@ -14,7 +15,7 @@ import guru.springframework.sfgpetclinic.services.interfaces.VisitService;
  *
  */
 @Service
-@Profile({"default", "map"})
+@Profile({ "default", "map" })
 public class VisitMapService extends AbstractBaseEntityMapService<Visit> implements VisitService {
 
 	@Override
@@ -24,5 +25,12 @@ public class VisitMapService extends AbstractBaseEntityMapService<Visit> impleme
 			throw new RuntimeException("Invalid visit");
 		}
 		return super.save(visit);
+	}
+
+	@Override
+	public VisitCommand saveVisitCommandAsEntity(VisitCommand visitCommand) {
+
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

@@ -62,7 +62,6 @@ public class VisitController {
         model.put("petCommand", petCommand);
         VisitCommand visitCommand = new VisitCommand();
         petCommand.addVisitCommand(visitCommand);
-        visitCommand.setPetCommand(petCommand);
         return visitCommand;
     }
 
