@@ -17,15 +17,12 @@ import guru.springframework.sfgpetclinic.model.Visit;
  *
  */
 class VisitToVisitCommandTest {
-	
 	VisitToVisitCommand converter;
 
-	
-    private static final Long ID_VALUE = Long.valueOf(1l);
-    private static final LocalDate DATE = LocalDate.of(2023,3,30);
-    private static final String DESCRIPTION = "description";
-    
-    
+	private static final Long ID_VALUE = Long.valueOf(1l);
+	private static final LocalDate DATE = LocalDate.of(2023, 3, 30);
+	private static final String DESCRIPTION = "description";
+
 	/**
 	 * @throws java.lang.Exception
 	 */
@@ -33,28 +30,29 @@ class VisitToVisitCommandTest {
 	void setUp() throws Exception {
 		converter = new VisitToVisitCommand();
 	}
-	
-    @Test
-    void testNullObject() throws Exception {
-    	Assertions.assertNull(converter.convert(null));
-    }
 
-    @Test
-    void testEmptyObject() throws Exception {
-    	Assertions.assertNotNull(converter.convert(new Visit()));
-    }
-    
+	@Test
+	void testNullObject() throws Exception {
+		Assertions.assertNull(converter.convert(null));
+	}
+
+	@Test
+	void testEmptyObject() throws Exception {
+		Assertions.assertNotNull(converter.convert(new Visit()));
+	}
+
 	@Test
 	void testConvert() {
-		//given
+		// given
 		Visit visit = new Visit();
 		visit.setId(ID_VALUE);
 		visit.setDescription(DESCRIPTION);
 		visit.setDate(DATE);
-        
+
+		// when
 		VisitCommand visitCommand = converter.convert(visit);
 
-		//then
+		// then
 		Assertions.assertEquals(ID_VALUE, visitCommand.getId());
 		Assertions.assertEquals(DESCRIPTION, visitCommand.getDescription());
 		Assertions.assertEquals(DATE, visitCommand.getDate());
