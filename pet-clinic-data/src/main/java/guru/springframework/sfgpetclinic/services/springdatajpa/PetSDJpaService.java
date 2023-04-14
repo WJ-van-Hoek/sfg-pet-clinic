@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import guru.springframework.sfgpetclinic.commands.PetCommand;
+import guru.springframework.sfgpetclinic.mappers.OwnerToOwnerCommand;
 import guru.springframework.sfgpetclinic.mappers.PetCommandToPet;
 import guru.springframework.sfgpetclinic.mappers.PetToPetCommand;
 import guru.springframework.sfgpetclinic.model.Pet;
@@ -30,21 +31,29 @@ extends AbstractBaseEntitySDJpaService<Pet, R> implements PetService {
 	PetToPetCommand petToPetCommand;
 	PetCommandToPet petCommandToPet;
 	
+	OwnerToOwnerCommand ownerToOwnerCommand;
+	
 	OwnerService ownerService;
 	
 	/**
 	 * @param repository
 	 */
-	public PetSDJpaService(R repository, OwnerService ownerService, PetToPetCommand petToPetCommand, PetCommandToPet petCommandToPet) {
+	public PetSDJpaService(R repository, OwnerService ownerService, PetToPetCommand petToPetCommand, PetCommandToPet petCommandToPet, OwnerToOwnerCommand ownerToOwnerCommand) {
 		super(repository);
 		this.ownerService = ownerService;
 		this.petToPetCommand = petToPetCommand;
 		this.petCommandToPet = petCommandToPet;
+		this.ownerToOwnerCommand = ownerToOwnerCommand;
 	}
 
 	
 	public PetCommand findCommandById(Long id) {
-		return toCommand(findById(id));
+		Pet pet = findById(id);
+		PetCommand petCommand = toCommand(pet);
+		if (petCommand != null) {
+			petCommand.setOwnerCommand(ownerToOwnerCommand.convert(pet.getOwner()));
+		}	
+		return petCommand;
 	}
 	
 	public Collection<PetCommand> findAllPetCommandsOfOwner(Long ownerId) {

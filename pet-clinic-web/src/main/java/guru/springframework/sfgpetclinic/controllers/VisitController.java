@@ -68,14 +68,14 @@ public class VisitController {
     // Spring MVC calls method loadPetWithVisit(...) before initNewVisitForm is called
     @GetMapping("/owner/*/pet/{petId}/visit/new")
     public String initNewVisitForm(@PathVariable Long petId, ModelMap model) {
-        return "pet/createOrUpdateVisitForm";
+        return "pet/visit/createOrUpdateVisitForm";
     }
 
     // Spring MVC calls method loadPetWithVisit(...) before processNewVisitForm is called
     @PostMapping("/owner/{ownerId}/pet/{petId}/visit/new")
     public String processNewVisitForm(@Valid VisitCommand visitCommand, BindingResult result) {
         if (result.hasErrors()) {
-            return "pet/createOrUpdateVisitForm";
+            return "pet/visit/createOrUpdateVisitForm";
         } else {
             visitService.saveVisitCommandAsEntity(visitCommand);
             return "redirect:/owner/{ownerId}/show";

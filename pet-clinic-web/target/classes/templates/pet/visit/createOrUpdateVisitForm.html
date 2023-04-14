@@ -22,7 +22,7 @@
       <td th:text="${petCommand.name}" /></td>
       <td
         th:text="${#temporals.format(petCommand.birthDate, 'yyyy-MM-dd')}" /></td>
-      <td th:text="${pet.petType}" /></td>
+      <td th:text="${petCommand.petType}" /></td>
       <td
         th:text="${petCommand.ownerCommand?.firstName + ' ' + petCommand.ownerCommand?.lastName}" /></td>
     </tr>
@@ -51,7 +51,7 @@
       <th>Date</th>
       <th>Description</th>
     </tr>
-    <tr th:if="${!visitCommand['new']}" th:each="visitCommand : ${visitCommand.visits}">
+    <tr th:if="${!visitCommand['new']}" th:each="visitCommand : ${petCommand.visitCommands}">
       <td th:text="${#temporals.format(visitCommand.date, 'yyyy-MM-dd')}" /></td>
       <td th:text=" ${visitCommand.description}" /></td>
     </tr>
