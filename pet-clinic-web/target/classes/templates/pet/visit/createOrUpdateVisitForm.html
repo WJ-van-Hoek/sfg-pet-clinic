@@ -1,0 +1,61 @@
+<html xmlns:th="http://www.thymeleaf.org"
+  th:replace="~{fragments/layout :: layout (~{::body},'owners')}">
+
+<body>
+
+  <h2>
+    <th:block th:if="${visitCommand['new']}">New </th:block>
+    Visit
+  </h2>
+
+  <b>Pet</b>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Birth Date</th>
+        <th>Type</th>
+        <th>Owner</th>
+      </tr>
+    </thead>
+    <tr>
+      <td th:text="${petCommand.name}" /></td>
+      <td
+        th:text="${#temporals.format(petCommand.birthDate, 'yyyy-MM-dd')}" /></td>
+      <td th:text="${petCommand.petType}" /></td>
+      <td
+        th:text="${petCommand.ownerCommand?.firstName + ' ' + petCommand.ownerCommand?.lastName}" /></td>
+    </tr>
+  </table>
+
+  <form th:object="${visitCommand}" class="form-horizontal" method="post">
+    <div class="form-group has-feedback">
+      <input
+        th:replace="~{fragments/inputField :: input ('Date', 'date', 'date')}"  />
+      <input
+        th:replace="~{fragments/inputField :: input ('Description', 'description', 'text')}" />
+    </div>
+
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <input type="hidden" name="petId" th:value="${petCommand.id}" />
+        <button class="btn btn-default" type="submit">Add Visit</button>
+      </div>
+    </div>
+  </form>
+
+  <br />
+  <b>Previous Visits</b>
+  <table class="table table-striped">
+    <tr>
+      <th>Date</th>
+      <th>Description</th>
+    </tr>
+    <tr th:if="${!visitCommand['new']}" th:each="visitCommand : ${petCommand.visitCommands}">
+      <td th:text="${#temporals.format(visitCommand.date, 'yyyy-MM-dd')}" /></td>
+      <td th:text=" ${visitCommand.description}" /></td>
+    </tr>
+  </table>
+
+</body>
+</html>

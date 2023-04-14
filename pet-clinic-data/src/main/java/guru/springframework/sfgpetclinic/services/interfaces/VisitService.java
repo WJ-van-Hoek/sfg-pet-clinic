@@ -3,6 +3,7 @@
  */
 package guru.springframework.sfgpetclinic.services.interfaces;
 
+import guru.springframework.sfgpetclinic.commands.VisitCommand;
 import guru.springframework.sfgpetclinic.model.Visit;
 
 /**
@@ -10,5 +11,5 @@ import guru.springframework.sfgpetclinic.model.Visit;
  *
  */
 public interface VisitService extends BaseEntityService<Visit> {
-
+	VisitCommand saveVisitCommandAsEntity(VisitCommand visitCommand);
 }

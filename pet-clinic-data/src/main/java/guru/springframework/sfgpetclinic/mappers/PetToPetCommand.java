@@ -39,6 +39,7 @@ public class PetToPetCommand implements Converter<Pet, PetCommand> {
 		result.setPetType(source.getPetType());
 		if (source.getVisits() != null && !source.getVisits().isEmpty()) {
 			source.getVisits().forEach((Visit visit) -> result.getVisitCommands().add(visitConverter.convert(visit)));
+			result.getVisitCommands().forEach(visitCommand -> visitCommand.setPetCommand(result));
 		}
 		return result;
 	}

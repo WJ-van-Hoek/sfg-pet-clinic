@@ -30,6 +30,20 @@ import lombok.Setter;
 @Table(name = "visits")
 public class Visit extends AbstractBaseEntity {
 
+	/**
+	 * @param b
+	 * @param date
+	 * @param description
+	 * @param pet
+	 */
+	@Builder
+	public Visit(Long id, LocalDate date, String description, Pet pet) {
+		super(id);
+		this.date = date;
+		this.description = description;
+		this.pet = pet;
+	}
+
 	@Column(name = "date")
 	private LocalDate date;
 
