@@ -1,8 +1,0 @@
--------------------------------------------------------------------------------
-Test set: guru.springframework.sfgpetclinic.mappers.PetCommandToPetTest
--------------------------------------------------------------------------------
-Tests run: 3, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.106 s <<< FAILURE! - in guru.springframework.sfgpetclinic.mappers.PetCommandToPetTest
-testConvert  Time elapsed: 0.025 s  <<< ERROR!
-java.lang.NullPointerException
-	at guru.springframework.sfgpetclinic.mappers.PetCommandToPetTest.testConvert(PetCommandToPetTest.java:83)
-

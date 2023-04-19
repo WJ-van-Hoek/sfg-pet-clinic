@@ -26,9 +26,11 @@ guru\springframework\sfgpetclinic\services\map_implementation\AbstractBaseEntity
 guru\springframework\sfgpetclinic\services\map_implementation\SpecialityMapService.class
 guru\springframework\sfgpetclinic\mappers\OwnerCommandToOwner.class
 guru\springframework\sfgpetclinic\services\springdatajpa\AbstractBaseEntitySDJpaService.class
+guru\springframework\sfgpetclinic\commands\VisitCommand$VisitCommandBuilder.class
 guru\springframework\sfgpetclinic\model\AbstractBaseEntity.class
 guru\springframework\sfgpetclinic\commands\VisitCommand.class
 guru\springframework\sfgpetclinic\model\AbstractPerson$AbstractPersonBuilder.class
+guru\springframework\sfgpetclinic\commands\PetTypeCommand$PetTypeCommandBuilder.class
 guru\springframework\sfgpetclinic\commands\PetCommand$PetCommandBuilder.class
 guru\springframework\sfgpetclinic\services\springdatajpa\OwnerSDJpaService.class
 guru\springframework\sfgpetclinic\services\springdatajpa\PetTypeSDJpaService.class
