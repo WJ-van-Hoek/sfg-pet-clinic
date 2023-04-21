@@ -24,18 +24,40 @@ import lombok.Setter;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 public class PetCommand extends AbstractBaseEntityCommand {
 	private String name;
 	private PetType petType;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate birthDate;
 	private OwnerCommand ownerCommand;
-	@Builder.Default
 	private Set<VisitCommand> visitCommands = new HashSet<>();
 
+	/**
+	 * @param b
+	 * @param name
+	 * @param petType
+	 * @param birthDate
+	 * @param ownerCommand
+	 * @param visitCommands
+	 */
+	@Builder
+	public PetCommand(Long id, String name, PetType petType, LocalDate birthDate,
+			OwnerCommand ownerCommand, Set<VisitCommand> visitCommands) {
+		super(id);
+		this.name = name;
+		this.petType = petType;
+		this.birthDate = birthDate;
+		this.ownerCommand = ownerCommand;
+		this.visitCommands = new HashSet<>();
+	}	
+		
 	public void addVisitCommand(VisitCommand visitCommand) {
 		visitCommand.setPetCommand(this);
 		this.getVisitCommands().add(visitCommand);
 	}
+
+
+
+	
+
 }
