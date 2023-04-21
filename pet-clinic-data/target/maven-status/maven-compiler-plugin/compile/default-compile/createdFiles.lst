@@ -7,6 +7,7 @@ guru\springframework\sfgpetclinic\repositories\VisitRepository.class
 guru\springframework\sfgpetclinic\model\Owner$OwnerBuilder.class
 guru\springframework\sfgpetclinic\mappers\VisitToVisitCommand.class
 guru\springframework\sfgpetclinic\services\interfaces\PetService.class
+guru\springframework\sfgpetclinic\services\springdatajpa\package-info.class
 guru\springframework\sfgpetclinic\commands\PetTypeCommand.class
 guru\springframework\sfgpetclinic\repositories\BaseEntityRepository.class
 guru\springframework\sfgpetclinic\services\interfaces\PetTypeService.class
@@ -14,7 +15,11 @@ guru\springframework\sfgpetclinic\services\map_implementation\AbstractMapService
 guru\springframework\sfgpetclinic\services\interfaces\OwnerService.class
 guru\springframework\sfgpetclinic\commands\OwnerCommand.class
 guru\springframework\sfgpetclinic\mappers\PetTypeToPetTypeCommand.class
+guru\springframework\sfgpetclinic\repositories\package-info.class
+guru\springframework\sfgpetclinic\services\map_implementation\package-info.class
 guru\springframework\sfgpetclinic\model\AbstractBaseEntity$AbstractBaseEntityBuilder.class
+guru\springframework\sfgpetclinic\services\package-info.class
+guru\springframework\sfgpetclinic\mappers\package-info.class
 guru\springframework\sfgpetclinic\mappers\VisitCommandToVisit.class
 guru\springframework\sfgpetclinic\model\AbstractPerson.class
 guru\springframework\sfgpetclinic\model\Pet$PetBuilder.class
@@ -58,6 +63,7 @@ guru\springframework\sfgpetclinic\commands\AbstractBaseEntityCommand$AbstractBas
 guru\springframework\sfgpetclinic\services\interfaces\PersonService.class
 guru\springframework\sfgpetclinic\repositories\PersonRepository.class
 guru\springframework\sfgpetclinic\services\map_implementation\AbstractPersonMapService.class
+guru\springframework\sfgpetclinic\services\interfaces\package-info.class
 guru\springframework\sfgpetclinic\services\springdatajpa\SpecialitySDJpaService.class
 guru\springframework\sfgpetclinic\commands\AbstractPersonCommand.class
 guru\springframework\sfgpetclinic\model\Vet$VetBuilder.class
