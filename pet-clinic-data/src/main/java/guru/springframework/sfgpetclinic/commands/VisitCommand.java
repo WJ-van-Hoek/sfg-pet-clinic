@@ -5,6 +5,8 @@ package guru.springframework.sfgpetclinic.commands;
 
 import java.time.LocalDate;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -20,7 +22,11 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class VisitCommand extends AbstractBaseEntityCommand {
-
+	private PetCommand petCommand;
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private LocalDate date;
+	private String description;
+	
 	/**
 	 * @param b
 	 * @param petCommand
@@ -34,8 +40,4 @@ public class VisitCommand extends AbstractBaseEntityCommand {
 		this.date = date;
 		this.description = description;
 	}
-
-	private PetCommand petCommand;
-	private LocalDate date;
-	private String description;
 }

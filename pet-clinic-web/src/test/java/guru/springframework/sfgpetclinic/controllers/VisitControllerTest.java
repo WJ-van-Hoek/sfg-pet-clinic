@@ -67,7 +67,7 @@ class VisitControllerTest {
 	}
 
 	@Test
-	void initNewVisitForm() throws Exception {
+	void initNewVisitFormTest() throws Exception {
 		when(petService.findCommandById(anyLong())).thenReturn(petCommand);
 
 		mockMvc.perform(get("/owner/1/pet/1/visit/new")).andExpect(status().isOk())
@@ -79,7 +79,7 @@ class VisitControllerTest {
 	}
 
 	@Test
-	void processNewVisitForm() throws Exception {
+	void processNewVisitFormTest() throws Exception {
 		VisitCommand savedVisitCommand = VisitCommand.builder().build();
 		when(visitService.saveVisitCommandAsEntity(any(VisitCommand.class))).thenReturn(savedVisitCommand);
 
