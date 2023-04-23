@@ -39,7 +39,9 @@ public abstract class AbstractMapService<T, ID> {
 	
 	public void nullCheck(T object) {
 		if (object == null) {
+			
 			throw new RuntimeException("Entity can not be null");
 		}
 	}
+
 }
