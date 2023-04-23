@@ -73,11 +73,11 @@ class PetMapServiceTest {
         Long typeId = 2L;
         PetType cat = PetType.builder().id(typeId).name("cat").build();
     	
-    	Long petId = 3L;
-        Pet pet2 = Pet.builder().id(petId).petType(cat).build();
+    	Long localPetId = 3L;
+        Pet pet2 = Pet.builder().id(localPetId).petType(cat).build();
         
         Pet savedPet = petMapService.save(pet2);
-        assertEquals(petId, savedPet.getId());
+        assertEquals(localPetId, savedPet.getId());
         assertEquals(cat, savedPet.getPetType());
         verify(petTypeService, times(1)).nullCheck(cat);
     }
@@ -102,11 +102,11 @@ class PetMapServiceTest {
         Long typeId = 2L;
         PetType cat = PetType.builder().id(typeId).name("cat").build();
     	
-    	Long petId = 1L;
-        Pet pet2 = Pet.builder().id(petId).petType(cat).build();
+    	Long localPetId = 1L;
+        Pet pet2 = Pet.builder().id(localPetId).petType(cat).build();
 
         Pet savedPet = petMapService.save(pet2);
-        assertEquals(petId, savedPet.getId());
+        assertEquals(localPetId, savedPet.getId());
         assertEquals(1, petMapService.findAll().size());
         verify(petTypeService, times(1)).nullCheck(cat);
     }
