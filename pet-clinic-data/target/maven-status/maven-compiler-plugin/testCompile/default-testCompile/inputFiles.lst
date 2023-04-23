@@ -9,6 +9,7 @@ C:\dev\workspaces\sfg-pet-clinic\pet-clinic-data\src\test\java\guru\springframew
 C:\dev\workspaces\sfg-pet-clinic\pet-clinic-data\src\test\java\guru\springframework\sfgpetclinic\mappers\OwnerCommandToOwnerTest.java
 C:\dev\workspaces\sfg-pet-clinic\pet-clinic-data\src\test\java\guru\springframework\sfgpetclinic\mappers\VisitToVisitCommandTest.java
 C:\dev\workspaces\sfg-pet-clinic\pet-clinic-data\src\test\java\guru\springframework\sfgpetclinic\services\springdatajpa\AbstractBaseEntitySDJpaServiceTest.java
+C:\dev\workspaces\sfg-pet-clinic\pet-clinic-data\src\test\java\guru\springframework\sfgpetclinic\services\map_implementation\PetMapServiceTest.java
 C:\dev\workspaces\sfg-pet-clinic\pet-clinic-data\src\test\java\guru\springframework\sfgpetclinic\mappers\PetTypeToPetTypeCommandTest.java
 C:\dev\workspaces\sfg-pet-clinic\pet-clinic-data\src\test\java\guru\springframework\sfgpetclinic\services\springdatajpa\AbstractPersonSDJpaServiceTest.java
 C:\dev\workspaces\sfg-pet-clinic\pet-clinic-data\src\test\java\guru\springframework\sfgpetclinic\mappers\PetCommandToPetTest.java

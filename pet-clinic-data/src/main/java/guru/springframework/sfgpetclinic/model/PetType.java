@@ -17,7 +17,6 @@ import lombok.Setter;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 @Entity
 @Table(name = "type")
 public class PetType extends AbstractBaseEntity {

@@ -2,6 +2,7 @@ guru\springframework\sfgpetclinic\model\Visit.class
 guru\springframework\sfgpetclinic\repositories\SpecialityRepository.class
 guru\springframework\sfgpetclinic\services\springdatajpa\AbstractPersonSDJpaService.class
 guru\springframework\sfgpetclinic\model\PetType$PetTypeBuilder.class
+guru\springframework\sfgpetclinic\commands\OwnerCommand$OwnerCommandBuilder.class
 guru\springframework\sfgpetclinic\model\Visit$VisitBuilder.class
 guru\springframework\sfgpetclinic\repositories\VisitRepository.class
 guru\springframework\sfgpetclinic\model\Owner$OwnerBuilder.class
@@ -11,10 +12,12 @@ guru\springframework\sfgpetclinic\services\springdatajpa\package-info.class
 guru\springframework\sfgpetclinic\commands\PetTypeCommand.class
 guru\springframework\sfgpetclinic\repositories\BaseEntityRepository.class
 guru\springframework\sfgpetclinic\services\interfaces\PetTypeService.class
+guru\springframework\sfgpetclinic\commands\OwnerCommand$OwnerCommandBuilderImpl.class
 guru\springframework\sfgpetclinic\services\map_implementation\AbstractMapService.class
 guru\springframework\sfgpetclinic\services\interfaces\OwnerService.class
 guru\springframework\sfgpetclinic\commands\OwnerCommand.class
 guru\springframework\sfgpetclinic\mappers\PetTypeToPetTypeCommand.class
+guru\springframework\sfgpetclinic\commands\AbstractPersonCommand$AbstractPersonCommandBuilder.class
 guru\springframework\sfgpetclinic\repositories\package-info.class
 guru\springframework\sfgpetclinic\services\map_implementation\package-info.class
 guru\springframework\sfgpetclinic\model\AbstractBaseEntity$AbstractBaseEntityBuilder.class

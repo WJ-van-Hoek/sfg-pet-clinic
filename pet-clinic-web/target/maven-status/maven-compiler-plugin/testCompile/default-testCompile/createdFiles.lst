@@ -2,3 +2,4 @@ guru\springframework\sfgpetclinic\formatters\PetTypeFormatterTest.class
 guru\springframework\sfgpetclinic\controllers\PetControllerTest.class
 guru\springframework\sfgpetclinic\controllers\OwnerControllerTest.class
 guru\springframework\sfgpetclinic\SfgPetClinicApplicationTests.class
+guru\springframework\sfgpetclinic\controllers\VisitControllerTest.class
